@@ -1,0 +1,6 @@
+#!/bin/bash
+# Copy files to expected placement
+
+sudo cp alert.py /usr/local/sbin/
+sudo cp alert.config  /etc/
+
