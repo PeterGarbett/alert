@@ -4,6 +4,6 @@
 #
 
 
-/usr/bin/python3  /usr/local/sbin/alert.py "/etc/alert.config" "test title" "test message"
+/usr/bin/python3  /home/embed/alert/alert.py "/etc/alert.config" "test title" "test message"
 
 
