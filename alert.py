@@ -1,4 +1,4 @@
-"Send an alert using ntfy "
+"Send an alert using ntfy"
 
 import sys
 import json
@@ -40,13 +40,35 @@ def alarm(config, title, message):
     )
 
 
+def notify(config, title, message):
+    "Use public nfty server to send non urgent notification"
+
+    nfty_details = load_config(config)
+
+    if len(nfty_details) != 2:
+        print("ERROR:Config file hasn't got two elements")
+        sys.exit()
+
+    server = nfty_details[0]
+    topic = nfty_details[1]
+
+    requests.post(
+        server + topic,
+        data=message,
+        headers={"Title": title, "Priority": "min", "Tags": "warning,skull"},
+        timeout=30,
+    )
+
+
 def main():
     "Extract data from command line and use it to send an alarm"
     sys.argv.pop(0)
     inputargs = sys.argv
 
     if len(inputargs) != 3:
-        print("Incorrect calling sequence , parameters should be config_file  title message")
+        print(
+            "Incorrect calling sequence , parameters should be config_file  title message"
+        )
         sys.exit()
 
     config = inputargs[0]
