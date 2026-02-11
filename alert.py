@@ -32,12 +32,18 @@ def alarm(config, title, message):
     server = nfty_details[0]
     topic = nfty_details[1]
 
-    requests.post(
-        server + topic,
-        data=message,
-        headers={"Title": title, "Priority": "urgent", "Tags": "warning,skull"},
-        timeout=30,
-    )
+    try:
+        requests.post(
+            server + topic,
+            data=message,
+            headers={"Title": title, "Priority": "urgent", "Tags": "warning,skull"},
+            timeout=30,
+        )
+    except Exception as err:
+        print(err)
+        return False
+
+    return True
 
 
 def notify(config, title, message):
@@ -52,12 +58,18 @@ def notify(config, title, message):
     server = nfty_details[0]
     topic = nfty_details[1]
 
-    requests.post(
-        server + topic,
-        data=message,
-        headers={"Title": title, "Priority": "min", "Tags": "warning,skull"},
-        timeout=30,
-    )
+    try:
+        requests.post(
+            server + topic,
+            data=message,
+            headers={"Title": title, "Priority": "min", "Tags": "warning,skull"},
+            timeout=30,
+        )
+    except Exception as err:
+        print(err)
+        return False
+
+    return True
 
 
 def main():
